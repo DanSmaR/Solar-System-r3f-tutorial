@@ -6,7 +6,15 @@ import { planetTextures } from '../utils/planetTextures';
 import type { PlanetProps } from '../types';
 import { OrbitPath } from './OrbitPath';
 
-export function Planet({name, color, radius = 0.2, radiusFromSun = 2, orbitSpeed = 0.1, initialOrbitAngle = 0 }: Readonly<PlanetProps>) {
+export function Planet({
+  name, 
+  color,
+  radius = 0.2,
+  radiusFromSun = 2,
+  orbitSpeed = 0.1,
+  initialOrbitAngle = 0,
+  onDoubleClick,
+}: Readonly<PlanetProps>) {
   const planetRef = useRef<Mesh>(null);
   const [orbitAnglePosition, setOrbitAnglePosition] = useState(initialOrbitAngle);
 
@@ -31,7 +39,13 @@ export function Planet({name, color, radius = 0.2, radiusFromSun = 2, orbitSpeed
     <>
       <OrbitPath orbitRadius={radiusFromSun} color={color} opacity={0.7} />
        
-      <mesh ref={planetRef} onClick={() => console.log(`Clicked on ${name}`)}>
+      <mesh
+        ref={planetRef}
+        onDoubleClick={(e) => {
+          e.stopPropagation();
+          if (onDoubleClick) onDoubleClick();
+        }}
+      >
         <Sphere args={[radius, 64, 64]}>
           <meshStandardMaterial
             {...props} 

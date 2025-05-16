@@ -5,7 +5,7 @@ import { Sun } from './Sun';
 import { Planet } from './Planet';
 import type { SceneProps } from '../types';
 
-export function Scene({ planets }: Readonly<SceneProps>) {
+export function Scene({ planets, onPlanetDoubleClick }: Readonly<SceneProps>) {
   const props = useTexture({
     map: universeBackground,
   });
@@ -23,6 +23,7 @@ export function Scene({ planets }: Readonly<SceneProps>) {
           radiusFromSun={planet.radiusFromSun}
           initialOrbitAngle={planet.initialOrbitAngle}
           orbitSpeed={planet.orbitSpeed}
+          onDoubleClick={() => onPlanetDoubleClick(planet)}
         />
       ))}
       

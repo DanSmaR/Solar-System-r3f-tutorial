@@ -11,6 +11,7 @@ export interface PlanetData {
 
 export interface SceneProps {
   readonly planets: PlanetData[];
+  readonly onPlanetDoubleClick: (planetData: PlanetData) => void;
 }
 
 export interface PlanetProps {
@@ -20,6 +21,7 @@ export interface PlanetProps {
   readonly radiusFromSun?: number;
   readonly initialOrbitAngle?: number;
   readonly orbitSpeed?: number;
+  readonly onDoubleClick?: () => void;
 }
 
 export interface OrbitProps {
