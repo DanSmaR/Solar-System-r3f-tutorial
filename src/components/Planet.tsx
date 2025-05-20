@@ -4,7 +4,6 @@ import { Sphere, useTexture } from '@react-three/drei';
 import type { Mesh } from 'three';
 import { planetTextures } from '../utils/planetTextures';
 import type { PlanetProps } from '../types';
-import { OrbitPath } from './OrbitPath';
 
 export function Planet({
   name, 
@@ -37,8 +36,6 @@ export function Planet({
 
   return (
     <>
-      <OrbitPath orbitRadius={radiusFromSun} color={color} opacity={0.7} />
-       
       <mesh
         ref={planetRef}
         onDoubleClick={(e) => {

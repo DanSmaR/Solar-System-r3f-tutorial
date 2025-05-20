@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import universeBackground from '../assets/universe_background.jpg';
 import { Sun } from './Sun';
 import { Planet } from './Planet';
+import { OrbitPath } from './OrbitPath';
 import type { SceneProps } from '../types';
 
 export function Scene({ planets, onPlanetDoubleClick }: Readonly<SceneProps>) {
@@ -15,16 +16,24 @@ export function Scene({ planets, onPlanetDoubleClick }: Readonly<SceneProps>) {
       <Sun />
       
       {planets.map((planet) => (
-        <Planet
-          key={planet.name}
-          name={planet.name}
-          color={planet.color}
-          radius={planet.radius}
-          radiusFromSun={planet.radiusFromSun}
-          initialOrbitAngle={planet.initialOrbitAngle}
-          orbitSpeed={planet.orbitSpeed}
-          onDoubleClick={() => onPlanetDoubleClick(planet)}
-        />
+        <>
+          <OrbitPath
+            key={`orbit-${planet.name}`}
+            orbitRadius={planet.radiusFromSun}
+            color={planet.color}
+            opacity={0.7}
+          />
+          <Planet
+            key={planet.name}
+            name={planet.name}
+            color={planet.color}
+            radius={planet.radius}
+            radiusFromSun={planet.radiusFromSun}
+            initialOrbitAngle={planet.initialOrbitAngle}
+            orbitSpeed={planet.orbitSpeed}
+            onDoubleClick={() => onPlanetDoubleClick(planet)}
+          />
+        </>
       ))}
       
       <mesh scale={[-800, 800, 800]}>
